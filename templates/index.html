@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ app_title }}</title>
+  <link rel="stylesheet" href="assets/skeleton/css/skeleton.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div id="wrapper" class="container">
+    <header>
+      <h1>{{ app_title }}</h1>
+    </header>
+    <main>
+      <div id="filter-container">
+        <form> 
+          <div class="row">
+            <div class="eight columns">
+              <label for="keyword">Keyword</label>
+              <input type="text" name="keyword" id="keyword" class="u-full-width" value="{{ keyword }}" placeholder="Keyword">
+            </div>
+            <div class="two columns">
+              <label for="search_index">Category</label>
+              <select name="search_index" id="search_index" class="u-full-width">
+              {% for index in search_indices %}
+                {% set data = search_index ~ "," ~ index %}
+                <option value="{{ index }}" {{ data | selected }}>{{ index }}</option>
+              {% endfor %}
+              </select>
+            </div>
+            <div class="two columns">
+              <button class="button-primary" id="search-button">search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      {% if items %}
+      <div id="results-container">
+        {% for item in items %}
+        <div class="item">
+          <div class="item-image-container">
+            <img src="{{ item.MediumImage.URL }}" alt="{{ item.ItemAttributes.Title }}" class="item-image">
+          </div>
+          <div class="item-details-container">
+            <a href="{{ item.DetailPageURL }}" class="item-title">
+              <strong>{{ item.ItemAttributes.Title }}</strong>
+            </a>
+            <div class="item-brand">{{ item.ItemAttributes.Brand }}</div>
+            <div class="item-price">{{ item.ItemAttributes.ListPrice.FormattedPrice }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% elseif has_searched %}
+        No results found
+      {% endif %}
+    </main>
+  </div>
+</body>
+</html>

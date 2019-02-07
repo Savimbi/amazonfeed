@@ -1,0 +1,19 @@
+{
+  "name": "amazon-searcher",
+  "version": "0.0.0",
+  "authors": [
+    "Wern Ancheta <ancheta.wern@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "skeleton": "skeleton-css#^2.0.4"
+  }
+}
